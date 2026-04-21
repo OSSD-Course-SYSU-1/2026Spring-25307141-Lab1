@@ -57,10 +57,10 @@ export default struct Home {
           ListItem() {
             // 使用滑动删除组件包装聊天项
             SwipeDeleteItem({
-              itemId: item.nickname,
+              itemId: item.nickname || '',
               onDelete: () => {
                 // 删除聊天记录
-                this.deleteChatItem(index, item.nickname)
+                this.deleteChatItem(index, item.nickname || '')
               }
             }) {
               ListChatItem({ data: item })
@@ -68,7 +68,7 @@ export default struct Home {
           }
           .onClick(() => {
             router.pushUrl({ url: 'pages/chat/ChatPage',
-              params: {name:item.nickname}
+              params: {name:item.nickname || ''}
             })
           })
         })
