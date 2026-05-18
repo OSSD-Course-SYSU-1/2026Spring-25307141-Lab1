@@ -1,5 +1,5 @@
 <video src="https://github.com/OSSD-Course-SYSU-1/2026Spring-25307141-Lab1/raw/refs/heads/main/%E6%95%88%E6%9E%9C%E6%BC%94%E7%A4%BA.mp4" width="100%" controls>
-    您的浏览器不支持 video 标签。
+   
 </video>
 
 ## 微信鸿蒙版
