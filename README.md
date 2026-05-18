@@ -1,3 +1,7 @@
+<video src="把你刚刚复制的 View raw 链接粘贴到这里" width="100%" controls>
+    您的浏览器不支持 video 标签。
+</video>
+
 ## 微信鸿蒙版
 
 基于最新鸿蒙API 15(HarmonyOS NEXT)和ArkTS开发的高仿微信APP
