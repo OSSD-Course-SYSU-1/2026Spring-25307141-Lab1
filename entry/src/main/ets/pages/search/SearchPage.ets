@@ -4,7 +4,6 @@ import common from '@ohos.app.ability.common';
 import window from '@ohos.window';
 import { Toast } from '../../utils/Toast';
 import WindowManager from '../../utils/WindowManager';
-
 @Entry
 @Component
 export default struct SearchPage {

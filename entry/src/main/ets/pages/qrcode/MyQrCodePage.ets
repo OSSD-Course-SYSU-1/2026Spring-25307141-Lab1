@@ -1,5 +1,4 @@
 import Toolbar from '../../component/Toolbar'
-
 @Entry
 @Component
 struct MyQrCodePage {

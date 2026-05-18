@@ -1,3 +1,4 @@
+import router from '@ohos.router'
 import ListMenuItem from '../../component/ListMenuItem'
 import WechatToolbar from '../../component/WechatToolbar'
 
@@ -8,7 +9,12 @@ export default struct Discovery {
     Column() {
       WechatToolbar({ title: "发现" })
 
+      // 朋友圈入口
       ListMenuItem({ title: "朋友圈", iconSrc: $r('app.media.ic_moment') })
+        .onClick(() => {
+          // 跳转到朋友圈页面
+          router.pushUrl({ url: 'pages/moment/MomentPage' })
+        })
 
       Divider()
         .vertical(false)

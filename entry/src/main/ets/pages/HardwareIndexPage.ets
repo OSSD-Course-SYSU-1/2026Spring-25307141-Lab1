@@ -8,7 +8,6 @@ import { sensor } from '@kit.SensorServiceKit'; //传感器数组Api
 import WindowManager from '../utils/WindowManager';
 
 dayjs.extend(duration)
-
 @Entry
 @Component
 struct HardwareIndexPage {
