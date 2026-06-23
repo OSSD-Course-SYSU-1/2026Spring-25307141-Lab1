@@ -1,6 +1,5 @@
 import router from '@ohos.router'
 import WechatToolbar from '../../component/WechatToolbar'
-import { DeviceType } from '../../utils/DeviceAdapter'
 
 @Entry
 @Component
@@ -8,11 +7,6 @@ export default struct MomentPage {
   // 窗口方向响应——平板旋转时保持内容方向不变
   @StorageLink('isLandscape') isLandscape: boolean = false
   @StorageLink('contentMaxWidth') contentMaxWidth: number = 0
-  @StorageLink('deviceType') deviceType: DeviceType = DeviceType.PHONE
-  @StorageLink('isLargeScreen') isLargeScreen: boolean = false
-  @StorageLink('fontSizeScale') fontSizeScale: number = 1.0
-  @StorageLink('iconSizeScale') iconSizeScale: number = 1.0
-  @StorageLink('paddingScale') paddingScale: number = 1.0
   // 朋友圈数据
   @State momentList: MomentItemData[] = [
     {
@@ -381,25 +375,9 @@ export default struct MomentPage {
       .width('100%')
       .height('100%')
     }
-    .width(this.getContentWidth())
+    .width(this.isLandscape ? this.contentMaxWidth : "100%")
     .height('100%')
     .backgroundColor('#f0f0f0')
-  }
-
-  /**
-   * 获取内容宽度
-   */
-  private getContentWidth(): Length {
-    // 平板或大屏设备：填满屏幕
-    if (this.deviceType === DeviceType.TABLET || this.isLargeScreen) {
-      return '100%';
-    }
-    // 手机横屏：限制宽度
-    if (this.isLandscape) {
-      return this.contentMaxWidth;
-    }
-    // 手机竖屏：100%宽度
-    return '100%';
   }
 }
 

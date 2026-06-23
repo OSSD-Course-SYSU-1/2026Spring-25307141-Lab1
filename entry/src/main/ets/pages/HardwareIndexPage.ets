@@ -7,10 +7,14 @@ import { display } from '@kit.ArkUI'; //屏幕
 import { sensor } from '@kit.SensorServiceKit'; //传感器数组Api
 import WindowManager from '../utils/WindowManager';
 
+
 dayjs.extend(duration)
 @Entry
 @Component
 struct HardwareIndexPage {
+  // 窗口方向响应——平板旋转时保持内容方向不变
+  @StorageLink('isLandscape') isLandscape: boolean = false
+  @StorageLink('contentMaxWidth') contentMaxWidth: number = 0
   // 产品名称
   @State marketName: string = '-'
   // 系统版本
@@ -179,7 +183,8 @@ struct HardwareIndexPage {
   }
 
   build() {
-    Navigation() {
+    Stack({ alignContent: Alignment.Center }) {
+      Navigation() {
       // 顶部硬件信息
       Column({ space: 20 }) {
         Text(this.marketName)
@@ -240,15 +245,19 @@ struct HardwareIndexPage {
       .borderRadius({ topLeft: 12, topRight: 12 })
       .clip(true)
     }
-    .title("硬件信息")
-    .titleMode(NavigationTitleMode.Mini)
-    .mode(NavigationMode.Stack)
-    .hideBackButton(false)
-    .padding({ top: WindowManager.statusBarHeight })
-    .linearGradient({
-      angle: 180,
-      colors: [["#285aee", 0], ["#69b3f7", 0.4], [Color.White, 0.4]]
-    })
+      .title("硬件信息")
+      .titleMode(NavigationTitleMode.Mini)
+      .mode(NavigationMode.Stack)
+      .hideBackButton(false)
+      .padding({ top: WindowManager.statusBarHeight })
+      .linearGradient({
+        angle: 180,
+        colors: [["#285aee", 0], ["#69b3f7", 0.4], [Color.White, 0.4]]
+      })
+    }
+    .width("100%")
+    .height("100%")
+    .backgroundColor(Color.White)
   }
 }
 

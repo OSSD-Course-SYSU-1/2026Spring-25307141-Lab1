@@ -1,13 +1,18 @@
 import Toolbar from '../../component/Toolbar'
+
 @Entry
 @Component
 struct MyQrCodePage {
   private value: string = 'https://github.com/ausboyue/Wechat_HarmonyOS'
 
-  build() {
+  // 窗口方向响应——平板旋转时保持内容方向不变
+  @StorageLink('isLandscape') isLandscape: boolean = false
+  @StorageLink('contentMaxWidth') contentMaxWidth: number = 0
 
-    Column() {
-      Toolbar({ title: "" })
+  build() {
+    Stack({ alignContent: Alignment.Center }) {
+      Column() {
+        Toolbar({ title: "" })
       Row() {
         Image($r('app.media.ic_user_head1'))
           .width(55)
@@ -91,6 +96,11 @@ struct MyQrCodePage {
       .margin({ bottom: 80 })
 
     }
+      .width(this.isLandscape ? this.contentMaxWidth : '100%')
+      .height('100%')
+    }
     .width('100%')
+    .height('100%')
+    .backgroundColor(Color.White)
   }
 }

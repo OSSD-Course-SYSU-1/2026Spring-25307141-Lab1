@@ -14,6 +14,7 @@ import { componentUtils } from '@kit.ArkUI';
 import { vibrator } from '@kit.SensorServiceKit';
 import { PermissionUtils } from '../../utils/PermissionUtils';
 
+
 enum WXInputType {
   /**
    * 语音输入
@@ -104,6 +105,10 @@ export default struct ChatPage {
   private keyboardHeight: number = 0
   @State private funcBarHeight: number = 0;
   @State private showFuncBar: boolean = false;
+
+  // 窗口方向响应——平板旋转时保持内容方向不变，自动调整尺寸
+  @StorageLink('isLandscape') isLandscape: boolean = false
+  @StorageLink('contentMaxWidth') contentMaxWidth: number = 0
   @State private dataList: ChatContentItemData[] = [
     {
       name: "鲁班",
@@ -328,9 +333,11 @@ export default struct ChatPage {
   }
 
   build() {
-    Column() {
-      Toolbar({ title: this.name })
-      List({ space: 20, initialIndex: this.dataList.length, scroller: this.scroller }) {
+    // 外层Stack：横屏时居中并限制内容最大宽度，保持内容方向不变
+    Stack({ alignContent: Alignment.Center }) {
+      Column() {
+        Toolbar({ title: this.name })
+        List({ space: 20, initialIndex: this.dataList.length, scroller: this.scroller }) {
         ForEach(this.dataList, (item: ChatContentItemData) => {
           ListItem() {
             if (item.self) {
@@ -465,10 +472,14 @@ export default struct ChatPage {
         .height(this.funcBarHeight)
 
     }
+      .width(this.isLandscape ? this.contentMaxWidth : "100%")
+      .height("100%")
+      .backgroundColor("#f1f1f1")
+      .padding({ bottom: WindowManager.navBarHeight })
+    }
     .width("100%")
     .height("100%")
     .backgroundColor("#f1f1f1")
-    .padding({ bottom: WindowManager.navBarHeight })
   }
 
   private sendTextMsg() {

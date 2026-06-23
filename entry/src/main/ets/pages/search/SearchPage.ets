@@ -4,6 +4,7 @@ import common from '@ohos.app.ability.common';
 import window from '@ohos.window';
 import { Toast } from '../../utils/Toast';
 import WindowManager from '../../utils/WindowManager';
+
 @Entry
 @Component
 export default struct SearchPage {
@@ -11,6 +12,10 @@ export default struct SearchPage {
   private controller: TextInputController = new TextInputController()
   private keyboardHeight: number = 0
   @State private searchText: string = ''
+
+  // 窗口方向响应——平板旋转时保持内容方向不变
+  @StorageLink('isLandscape') isLandscape: boolean = false
+  @StorageLink('contentMaxWidth') contentMaxWidth: number = 0
 
   async aboutToAppear() {
     await window.getLastWindow(getContext(this)).then(currentWindow => {
@@ -25,9 +30,10 @@ export default struct SearchPage {
   }
 
   build() {
-    Column() {
-      Row() {
-        Stack() {
+    Stack({ alignContent: Alignment.Center }) {
+      Column() {
+        Row() {
+          Stack() {
           TextInput({ text: this.searchText, placeholder: '搜索', controller: this.controller })
             .placeholderFont({ size: 20, weight: 400 })
             .caretColor(Color.Green)
@@ -183,19 +189,23 @@ export default struct SearchPage {
         .margin({ bottom: 80 })
 
     }
+      .width(this.isLandscape ? this.contentMaxWidth : "100%")
+      .height("100%")
+      .alignItems(HorizontalAlign.Start)
+      .backgroundColor("#f3f3f3")
+      .padding({ top: WindowManager.statusBarHeight, bottom: WindowManager.navBarHeight })
+      .onKeyEvent((event: KeyEvent) => {
+        if (event.type === KeyType.Up) {
+          prompt.showToast({
+            message: "按了返回键"
+          });
+        }
+        event.stopPropagation()
+      })
+    }
     .width("100%")
     .height("100%")
-    .alignItems(HorizontalAlign.Start)
     .backgroundColor("#f3f3f3")
-    .padding({ top: WindowManager.statusBarHeight, bottom: WindowManager.navBarHeight })
-    .onKeyEvent((event: KeyEvent) => {
-      if (event.type === KeyType.Up) {
-        prompt.showToast({
-          message: "按了返回键"
-        });
-      }
-      event.stopPropagation()
-    })
   }
 }
 

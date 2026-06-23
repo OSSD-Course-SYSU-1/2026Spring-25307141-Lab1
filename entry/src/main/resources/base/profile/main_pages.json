@@ -1,8 +1,11 @@
 {
   "src": [
     "pages/Index",
+    "pages/MainPage",
+    "pages/DetailPage",
     "pages/search/SearchPage",
     "pages/chat/ChatPage",
+    "pages/chat/ResponsiveChatPage",
     "pages/qrcode/MyQrCodePage",
     "pages/HardwareIndexPage",
     "pages/moment/MomentPage"
