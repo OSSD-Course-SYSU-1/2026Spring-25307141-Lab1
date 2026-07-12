@@ -3,9 +3,13 @@
     "pages/Index",
     "pages/MainPage",
     "pages/DetailPage",
+    "pages/ChatTestPage",
+    "pages/ChatDebugPage",
     "pages/search/SearchPage",
     "pages/chat/ChatPage",
+    "pages/chat/SimpleChatPage",
     "pages/chat/ResponsiveChatPage",
+    "pages/friend/FriendListPage",
     "pages/qrcode/MyQrCodePage",
     "pages/HardwareIndexPage",
     "pages/moment/MomentPage"

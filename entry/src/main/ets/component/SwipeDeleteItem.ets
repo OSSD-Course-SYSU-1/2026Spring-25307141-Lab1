@@ -20,6 +20,8 @@ export struct SwipeDeleteItem {
   @BuilderParam content: () => void
   // 删除回调
   onDelete?: () => void
+  // 内容点击回调
+  onItemClick?: () => void
   // 唯一标识（用于调试）
   itemId?: string = ''
   
@@ -125,6 +127,8 @@ export struct SwipeDeleteItem {
       .onClick(() => {
         if (this.showDeleteButton) {
           this.resetSwipe()
+        } else if (this.onItemClick) {
+          this.onItemClick()
         }
       })
     }

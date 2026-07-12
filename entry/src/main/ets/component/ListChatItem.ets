@@ -52,6 +52,7 @@ export default struct ListChatItem {
 }
 
 export interface ChatItemData {
+  id?: string
   headSrc?: Resource
   nickname?: string
   content?: string
